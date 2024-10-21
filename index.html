@@ -6,20 +6,31 @@
     <title>Digital Paint Club</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        #canvasContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
         }
         #pixelCanvas {
-            border: 1px solid black;
-            cursor: crosshair;
+            display: block;
+            background-color: #FFFFFF;
+            width: 1000px; /* Fixed width */
+            height: 1000px; /* Fixed height */
+            border: none; /* No border for pixels */
+            position: absolute;
+            left: 50%; /* Center horizontally */
+            top: 50%; /* Center vertically */
+            transform: translate(-50%, -50%); /* Center adjustment */
         }
         #colorPalette {
-            display: flex;
-            flex-direction: column;
-            margin-right: 20px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
         }
         .colorBox {
             width: 40px;
@@ -27,30 +38,28 @@
             margin-bottom: 10px;
             cursor: pointer;
         }
+        #colorPicker {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Color Palette -->
-            <div id="colorPalette" class="col-md-2 text-center">
-                <h3>Choose Color</h3>
-                <div class="colorBox" style="background-color: #FF0000;" data-color="#FF0000"></div>
-                <div class="colorBox" style="background-color: #00FF00;" data-color="#00FF00"></div>
-                <div class="colorBox" style="background-color: #0000FF;" data-color="#0000FF"></div>
-                <div class="colorBox" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
-                <div class="colorBox" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
-                <div class="colorBox" style="background-color: #00FFFF;" data-color="#00FFFF"></div>
-                <div class="colorBox" style="background-color: #000000;" data-color="#000000"></div>
-                <div class="colorBox" style="background-color: #FFFFFF;" data-color="#FFFFFF"></div>
-            </div>
-
-            <!-- Canvas -->
-            <div id="canvasContainer" class="col-md-10">
-                <canvas id="pixelCanvas" width="800" height="800"></canvas>
-            </div>
-        </div>
+    <div id="colorPalette">
+        <h3>Choose Color</h3>
+        <input type="color" id="colorPicker" value="#000000">
+        <div class="colorBox" style="background-color: #FF0000;" data-color="#FF0000"></div>
+        <div class="colorBox" style="background-color: #00FF00;" data-color="#00FF00"></div>
+        <div class="colorBox" style="background-color: #0000FF;" data-color="#0000FF"></div>
+        <div class="colorBox" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
+        <div class="colorBox" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
+        <div class="colorBox" style="background-color: #00FFFF;" data-color="#00FFFF"></div>
+        <div class="colorBox" style="background-color: #000000;" data-color="#000000"></div>
+        <div class="colorBox" style="background-color: #FFFFFF;" data-color="#FFFFFF"></div>
     </div>
+
+    <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
 
     <script src="script.js"></script>
 </body>
