@@ -2,9 +2,16 @@ const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
 const colorPalette = document.querySelectorAll('.colorBox');
 const colorPicker = document.getElementById('colorPicker');
-const pixelSize = 10; // Pixel size for the canvas
+const pixelSize = 1; // Each pixel is 1x1 pixels
 let currentColor = '#000000'; // Default color
 let isDrawing = false;
+
+// Set up the canvas size dynamically
+function setCanvasSize() {
+    const colorPaletteHeight = document.getElementById('colorPalette').offsetHeight + 20; // Including some padding
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - colorPaletteHeight;
+}
 
 // Set up the canvas grid
 function drawGrid() {
@@ -39,8 +46,8 @@ canvas.addEventListener('mouseup', function() {
 canvas.addEventListener('mousemove', function(event) {
     if (isDrawing) {
         const rect = canvas.getBoundingClientRect();
-        const x = Math.floor((event.clientX - rect.left) / pixelSize) * pixelSize;
-        const y = Math.floor((event.clientY - rect.top) / pixelSize) * pixelSize;
+        const x = Math.floor((event.clientX - rect.left) / pixelSize);
+        const y = Math.floor((event.clientY - rect.top) / pixelSize);
 
         // Draw the pixel
         ctx.fillStyle = currentColor;
@@ -72,8 +79,8 @@ canvas.addEventListener('touchmove', function(event) {
 function handleTouch(event) {
     const rect = canvas.getBoundingClientRect();
     const touch = event.touches[0];
-    const x = Math.floor((touch.clientX - rect.left) / pixelSize) * pixelSize;
-    const y = Math.floor((touch.clientY - rect.top) / pixelSize) * pixelSize;
+    const x = Math.floor((touch.clientX - rect.left) / pixelSize);
+    const y = Math.floor((touch.clientY - rect.top) / pixelSize);
 
     // Draw the pixel
     ctx.fillStyle = currentColor;
@@ -100,6 +107,13 @@ function loadPixelState() {
     }
 }
 
-// Initialize the canvas
+// Initialize the canvas size and load the state
+setCanvasSize();
 drawGrid();
 loadPixelState();
+
+// Update canvas size on window resize
+window.addEventListener('resize', () => {
+    setCanvasSize();
+    loadPixelState(); // Re-load saved pixels after resize
+});
