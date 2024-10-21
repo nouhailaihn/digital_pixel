@@ -1,17 +1,16 @@
 const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
 const colorPalette = document.querySelectorAll('.colorBox');
+const colorPicker = document.getElementById('colorPicker');
 const pixelSize = 10; // Pixel size for the canvas
 let currentColor = '#000000'; // Default color
 let isDrawing = false;
 
 // Set up the canvas grid
 function drawGrid() {
-    for (let x = 0; x < canvas.width; x += pixelSize) {
-        for (let y = 0; y < canvas.height; y += pixelSize) {
-            ctx.strokeRect(x, y, pixelSize, pixelSize);
-        }
-    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#FFFFFF"; // Background color
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 // Activate a color from the palette
@@ -19,6 +18,11 @@ colorPalette.forEach(colorBox => {
     colorBox.addEventListener('click', function() {
         currentColor = this.getAttribute('data-color');
     });
+});
+
+// Activate color from color picker
+colorPicker.addEventListener('input', function() {
+    currentColor = this.value;
 });
 
 // Start drawing when the mouse is pressed
@@ -47,6 +51,38 @@ canvas.addEventListener('mousemove', function(event) {
     }
 });
 
+// Handle touch events for mobile support
+canvas.addEventListener('touchstart', function(event) {
+    event.preventDefault(); // Prevent scrolling
+    isDrawing = true;
+    handleTouch(event);
+});
+
+canvas.addEventListener('touchend', function() {
+    isDrawing = false;
+});
+
+canvas.addEventListener('touchmove', function(event) {
+    if (isDrawing) {
+        handleTouch(event);
+    }
+});
+
+// Handle drawing on touch devices
+function handleTouch(event) {
+    const rect = canvas.getBoundingClientRect();
+    const touch = event.touches[0];
+    const x = Math.floor((touch.clientX - rect.left) / pixelSize) * pixelSize;
+    const y = Math.floor((touch.clientY - rect.top) / pixelSize) * pixelSize;
+
+    // Draw the pixel
+    ctx.fillStyle = currentColor;
+    ctx.fillRect(x, y, pixelSize, pixelSize);
+
+    // Save the pixel data
+    savePixelState(x, y, currentColor);
+}
+
 // Save pixel state to localStorage
 function savePixelState(x, y, color) {
     let pixelData = JSON.parse(localStorage.getItem('pixelData')) || {};
@@ -64,6 +100,6 @@ function loadPixelState() {
     }
 }
 
-// Initialize the grid and load any saved pixels
+// Initialize the canvas
 drawGrid();
 loadPixelState();
