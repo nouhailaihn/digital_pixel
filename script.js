@@ -6,11 +6,10 @@ const pixelSize = 1; // Each pixel is 1x1 pixels
 let currentColor = '#000000'; // Default color
 let isDrawing = false;
 
-// Set up the canvas size dynamically
+// Set up the canvas to fill the entire screen
 function setCanvasSize() {
-    const colorPaletteHeight = document.getElementById('colorPalette').offsetHeight + 20; // Including some padding
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - colorPaletteHeight;
+    canvas.width = window.innerWidth; // Full width of the screen
+    canvas.height = window.innerHeight; // Full height of the screen
 }
 
 // Set up the canvas grid
