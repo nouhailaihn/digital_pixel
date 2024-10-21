@@ -15,13 +15,11 @@
         #pixelCanvas {
             display: block;
             background-color: #FFFFFF;
-            width: 1000px; /* Fixed width */
-            height: 1000px; /* Fixed height */
             border: none; /* No border for pixels */
             position: absolute;
-            left: 50%; /* Center horizontally */
-            top: 50%; /* Center vertically */
-            transform: translate(-50%, -50%); /* Center adjustment */
+            left: 0;
+            top: 0;
+            z-index: 1; /* Canvas below color picker */
         }
         #colorPalette {
             position: fixed;
@@ -59,7 +57,7 @@
         <div class="colorBox" style="background-color: #FFFFFF;" data-color="#FFFFFF"></div>
     </div>
 
-    <canvas id="pixelCanvas" width="1000" height="1000"></canvas>
+    <canvas id="pixelCanvas"></canvas>
 
     <script src="script.js"></script>
 </body>
