@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+#canvas {
+    display: grid;
+    grid-template-columns: repeat(200, 1fr);
+    grid-template-rows: repeat(100, 1fr);
+    width: 2000px;
+    height: 1000px;
+    margin: auto;
+    border: 5px solid rgba(0, 0, 0, 0.5); /* Clear border */
+    background-color: #fff;
+}
+
+.pixel {
+    width: 10px; /* Adjust for a 2000px canvas */
+    height: 10px; /* Adjust for a 1000px canvas */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Transparent pixel border */
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.color-picker {
+    margin: 20px 0;
+}
