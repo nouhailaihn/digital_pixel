@@ -12,26 +12,20 @@
             padding: 20px;
             background-color: #f4f4f4;
         }
-        #canvas-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px auto;
-            padding: 10px;
-            border: 10px solid #333; /* Painting-like frame border */
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Give it some depth */
-        }
         #canvas {
             display: grid;
             grid-template-columns: repeat(1000, 1fr); /* 1000x1000 grid */
             grid-template-rows: repeat(1000, 1fr);
-            width: 800px;
-            height: 800px;
+            width: 1000px;  /* Fixed width */
+            height: 1000px; /* Fixed height */
             margin: auto;
+            border: 10px solid #333; /* Border for painting-like effect */
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Give depth to the frame */
         }
         .pixel {
-            width: 8px;
-            height: 8px;
+            width: 100%;
+            height: 100%;
             border: 0.5px solid #ddd;
             box-sizing: border-box;
             cursor: pointer;
@@ -48,10 +42,7 @@
     <input type="color" id="colorPicker" value="#ff0000">
 </div>
 
-<!-- Container for canvas with border for a painting look -->
-<div id="canvas-container">
-    <div id="canvas"></div>
-</div>
+<div id="canvas"></div>
 
 <script>
     const canvas = document.getElementById('canvas');
