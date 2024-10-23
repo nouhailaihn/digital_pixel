@@ -54,7 +54,7 @@
     // Function to create pixels (500 columns x 50 rows = 25,000 pixels)
     const createPixels = () => {
         let pixelsHTML = '';
-        for (let i = 0; i < 25000; i++) { // Loop for 25,000 pixels
+        for (let i = 0; i < 20000; i++) { // Loop for 25,000 pixels
             pixelsHTML += `<div class="pixel" data-index="${i}" style="background-color: #fff;"></div>`;
         }
         canvas.innerHTML = pixelsHTML; // Add all pixels in one go
