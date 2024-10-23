@@ -51,7 +51,7 @@
     // Function to create pixels (using 100x100 grid for performance)
     const createPixels = () => {
         let pixelsHTML = '';
-        for (let i = 0; i < 100000; i++) { // Loop for 10,000 pixels
+        for (let i = 0; i < 1000; i++) { // Loop for 10,000 pixels
             pixelsHTML += `<div class="pixel" data-index="${i}" style="background-color: #fff;"></div>`;
         }
         canvas.innerHTML = pixelsHTML; // Add all pixels in one go
