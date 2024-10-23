@@ -14,12 +14,12 @@
         }
         #canvas {
             display: grid;
-            grid-template-columns: repeat(400, 1fr); /* 400 columns */
-            grid-template-rows: repeat(250, 1fr); /* 250 rows for total of 100,000 pixels */
+            grid-template-columns: repeat(500, 1fr); /* 500 columns */
+            grid-template-rows: repeat(100, 1fr); /* 100 rows for total of 50,000 pixels */
             width: 100%; /* Full width for responsiveness */
             max-width: 1000px; /* Maximum width */
             height: auto; /* Automatic height */
-            aspect-ratio: 4 / 2.5; /* Maintain width-to-height ratio */
+            aspect-ratio: 5 / 1; /* Maintain width-to-height ratio */
             margin: auto;
             border: 10px solid #333;
             background-color: #fff;
@@ -50,10 +50,10 @@
     const canvas = document.getElementById('canvas');
     const colorPicker = document.getElementById('colorPicker');
 
-    // Function to create pixels (400 columns x 250 rows = 100,000 pixels)
+    // Function to create pixels (500 columns x 100 rows = 50,000 pixels)
     const createPixels = () => {
         let pixelsHTML = '';
-        for (let i = 0; i < 100000; i++) { // Loop for 100,000 pixels
+        for (let i = 0; i < 50000; i++) { // Loop for 50,000 pixels
             pixelsHTML += `<div class="pixel" data-index="${i}" style="background-color: #fff;"></div>`;
         }
         canvas.innerHTML = pixelsHTML; // Add all pixels in one go
