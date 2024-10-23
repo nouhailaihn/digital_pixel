@@ -14,10 +14,12 @@
         }
         #canvas {
             display: grid;
-            grid-template-columns: repeat(100, 1fr); /* Adjusted to 100x100 grid for performance */
-            grid-template-rows: repeat(100, 1fr);
-            width: 1000px;
-            height: 1000px;
+            grid-template-columns: repeat(400, 1fr); /* 400 columns */
+            grid-template-rows: repeat(250, 1fr); /* 250 rows for total of 100,000 pixels */
+            width: 100%; /* Full width for responsiveness */
+            max-width: 1000px; /* Maximum width */
+            height: auto; /* Automatic height */
+            aspect-ratio: 4 / 2.5; /* Maintain width-to-height ratio */
             margin: auto;
             border: 10px solid #333;
             background-color: #fff;
@@ -48,10 +50,10 @@
     const canvas = document.getElementById('canvas');
     const colorPicker = document.getElementById('colorPicker');
 
-    // Function to create pixels (using 100x100 grid for performance)
+    // Function to create pixels (400 columns x 250 rows = 100,000 pixels)
     const createPixels = () => {
         let pixelsHTML = '';
-        for (let i = 0; i < 1000; i++) { // Loop for 10,000 pixels
+        for (let i = 0; i < 100000; i++) { // Loop for 100,000 pixels
             pixelsHTML += `<div class="pixel" data-index="${i}" style="background-color: #fff;"></div>`;
         }
         canvas.innerHTML = pixelsHTML; // Add all pixels in one go
