@@ -14,14 +14,14 @@
         }
         #canvas {
             display: grid;
-            grid-template-columns: repeat(1000, 1fr); /* 1000x1000 grid */
-            grid-template-rows: repeat(1000, 1fr);
-            width: 1000px;  /* Fixed width */
-            height: 1000px; /* Fixed height */
+            grid-template-columns: repeat(100, 1fr); /* Adjusted to 100x100 grid for performance */
+            grid-template-rows: repeat(100, 1fr);
+            width: 1000px;
+            height: 1000px;
             margin: auto;
-            border: 10px solid #333; /* Border for painting-like effect */
+            border: 10px solid #333;
             background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Give depth to the frame */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
         .pixel {
             width: 100%;
@@ -48,15 +48,13 @@
     const canvas = document.getElementById('canvas');
     const colorPicker = document.getElementById('colorPicker');
 
-    // Function to create 1 million pixels (1000x1000)
+    // Function to create pixels (using 100x100 grid for performance)
     const createPixels = () => {
-        for (let i = 0; i < 1000000; i++) { // Loop for 1 million pixels
-            const pixel = document.createElement('div');
-            pixel.className = 'pixel';
-            pixel.dataset.index = i;
-            pixel.style.backgroundColor = '#fff'; // Default color
-            canvas.appendChild(pixel);
+        let pixelsHTML = '';
+        for (let i = 0; i < 10000; i++) { // Loop for 10,000 pixels
+            pixelsHTML += `<div class="pixel" data-index="${i}" style="background-color: #fff;"></div>`;
         }
+        canvas.innerHTML = pixelsHTML; // Add all pixels in one go
     };
 
     // Call function to create pixels
@@ -68,6 +66,7 @@
             const color = colorPicker.value;
             event.target.style.backgroundColor = color;
             const pixelIndex = event.target.dataset.index;
+
             // Save pixel color to backend
             fetch('/update-pixel', {
                 method: 'POST',
@@ -85,7 +84,9 @@
         .then(data => {
             data.forEach(pixel => {
                 const pixelDiv = canvas.children[pixel.index];
-                pixelDiv.style.backgroundColor = pixel.color;
+                if (pixelDiv) {
+                    pixelDiv.style.backgroundColor = pixel.color;
+                }
             });
         })
         .catch(err => console.error('Failed to load pixels:', err));
